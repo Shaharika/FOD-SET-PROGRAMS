@@ -1,0 +1,28 @@
+import pandas as pd
+import numpy as np
+from scipy import stats
+data = {
+    'product_title': ['Pineapple slicer', 'Levis Jeans Pant', 'Wallet', 'Salwar'],
+    'product_category': ['Apparel', 'Apparel', 'Apparel', 'Apparel'],
+    'star_rating': [4, 5, 5, 5],
+    'review_headline': ['Really good', 'Perfect Dress', 'Love it', 'Awesome'],
+    'review_date': ['2013-01-14', '2014-04-22', '2015-07-28', '2015-06-12']
+}
+df = pd.DataFrame(data)
+product_category_of_interest = 'Apparel'
+filtered_df = df[df['product_category'] == product_category_of_interest]
+average_rating = filtered_df['star_rating'].mean()
+confidence_level = 0.95
+sample_size = len(filtered_df)
+standard_error = stats.sem(filtered_df['star_rating'])
+margin_of_error = stats.t.ppf((1 + confidence_level) / 2, sample_size - 1) * (standard_error / np.sqrt(sample_size))
+confidence_interval = (average_rating - margin_of_error, average_rating + margin_of_error)
+print(f"Product Category: {product_category_of_interest}")
+print(f"Average Rating: {average_rating:.2f}")
+print(f"95% Confidence Interval: {confidence_interval[0]:.2f} - {confidence_interval[1]:.2f}")
+
+
+Output:
+Product Category: Apparel
+Average Rating: 4.75
+95% Confidence Interval: 3.57 - 5.93
