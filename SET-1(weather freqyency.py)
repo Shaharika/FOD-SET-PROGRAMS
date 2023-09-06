@@ -1,0 +1,37 @@
+# Sample weather data
+weather_data = [
+    "Sunny", "Rainy", "Sunny", "Cloudy", "Rainy",
+    "Sunny", "Sunny", "Cloudy", "Rainy", "Sunny",
+    "Rainy", "Cloudy", "Sunny", "Sunny", "Cloudy"
+]
+
+# Create a dictionary to store the frequency of each weather condition
+weather_freq = {}
+
+# Calculate the frequency distribution
+for condition in weather_data:
+    if condition in weather_freq:
+        weather_freq[condition] += 1
+    else:
+        weather_freq[condition] = 1
+
+# Find the most common weather type
+most_common_weather = max(weather_freq, key=weather_freq.get)
+
+# Print the frequency distribution and most common weather type
+print("Weather Frequency Distribution:")
+for condition, frequency in weather_freq.items():
+    print(f"{condition}: {frequency} times")
+
+print(f"The most common weather type is {most_common_weather} with {weather_freq[most_common_weather]} occurrences.")
+
+
+
+
+
+Output:
+Weather Frequency Distribution:
+Sunny: 7 times
+Rainy: 4 times
+Cloudy: 4 times
+The most common weather type is Sunny with 7 occurrences.
